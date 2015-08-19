@@ -10,7 +10,7 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra -pedantic -O3
 
 CXX = g++
-CXXFLAGS = -Wall -Werror -Wextra -pedantic -O3 -std=c++14
+CXXFLAGS = $(CFLAGS) -std=c++14
 
 LDFLAGS = -lm
 
