@@ -12,8 +12,6 @@ CFLAGS = -Wall -Werror -Wextra -pedantic -O3
 CXX = g++
 CXXFLAGS = $(CFLAGS) -std=c++14
 
-LDFLAGS = -lm
-
 OBJ = $(patsubst %.cpp,$(OBJDIR)/%.o,$(CXXSOURCE)) \
 	  $(patsubst %.c,$(OBJDIR)/%.o,$(CCSOURCE))
 
