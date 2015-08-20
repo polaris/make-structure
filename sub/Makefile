@@ -1,6 +1,6 @@
 BIN = libsub.a
 BINDIR = ../bin
-OBJDIR = ../obj
+OBJDIR = obj
 
 HEADER = sub.h
 CXXSOURCE = sub.cpp

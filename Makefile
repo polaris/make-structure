@@ -8,7 +8,7 @@ all: subdirs
 .PHONY: clean
 clean:
 	@rm -rf $(BINDIR)
-	@rm -rf $(OBJDIR)
+	@rm -rf `find . -name $(OBJDIR) -type d`
 
 .PHONY: subdirs $(SUBDIRS)
 subdirs: $(SUBDIRS)
