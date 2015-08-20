@@ -1,4 +1,3 @@
-BIN = libsub.a
 BINDIR = ../bin
 OBJDIR = obj
 
@@ -13,16 +12,35 @@ CXX = g++
 CXXFLAGS = $(CFLAGS) -std=c++14
 
 OBJ = $(patsubst %.cpp,$(OBJDIR)/%.o,$(CXXSOURCE)) \
-	  $(patsubst %.c,$(OBJDIR)/%.o,$(CCSOURCE))
+	$(patsubst %.c,$(OBJDIR)/%.o,$(CCSOURCE))
+
+
+$(BINDIR)/libsub.a: $(CXXOBJ) $(OBJ)
+	@mkdir -p $(BINDIR)
+	ar rcs $@ $^
+PHONY: libsub.a
+libsub.a: $(BINDIR)/libsub.a
+
+
+$(BINDIR)/libsubsub.a: force_look
+	@cd subsub; $(MAKE) $(MAKEFLAGS) $(notdir $@)
+.PHONY: libsubsub.a
+libsubsub.a: $(BINDIR)/libsubsub.a
+
 
 $(OBJDIR)/%.o: %.c $(HEADER)
 	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c -o $@ $<
-
 $(OBJDIR)/%.o: %.cpp $(HEADER)
 	@mkdir -p $(OBJDIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
-$(BINDIR)/$(BIN): $(CXXOBJ) $(OBJ)
-	@mkdir -p $(BINDIR)
-	ar rcs $@ $^
+
+.PHONY: clean
+clean:
+	@rm -rf `find . -name $(OBJDIR) -type d`
+
+
+.PHONY: force_look
+force_look:
+	@true
